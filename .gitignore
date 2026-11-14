@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.DS_Store
+Screenshot*.png
+desktop-*.png
+mobile-*.png
+WhatsApp*.jpeg

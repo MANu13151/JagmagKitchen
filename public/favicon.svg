@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <rect width="100" height="100" rx="20" fill="#283618"/>
+  <rect x="6" y="6" width="88" height="88" rx="16" fill="none" stroke="#DDA15E" stroke-width="2"/>
+  <circle cx="50" cy="50" r="32" fill="none" stroke="#BC6C25" stroke-width="1.5" stroke-dasharray="3 3"/>
+  <text x="50" y="58" font-family="'Cinzel', serif" font-weight="800" font-size="28" fill="#FEFAE0" text-anchor="middle" letter-spacing="1">J</text>
+  <path d="M50 22 L52 26 L56 26 L53 29 L54 33 L50 30 L46 33 L47 29 L44 26 L48 26 Z" fill="#DDA15E"/>
+</svg>
