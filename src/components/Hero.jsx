@@ -6,17 +6,16 @@ export default function Hero({ onOpenBanquet, onOpenReservation }) {
   return (
     <section className="relative min-h-[92vh] flex items-center justify-center overflow-hidden bg-[#283618] text-[#FEFAE0]">
       
-      {/* Background Architectural Photograph with Vivid Chandelier Lighting & Subtle Vignette */}
+      {/* Background Architectural Photograph with Warm Amber & Copper True Colors */}
       <div className="absolute inset-0 z-0">
         <img
           src="/assets/chandelier-dining-hall.jpg"
           alt="Jagmag Kitchen glowing macramé chandeliers and cove-lit curved dining hall"
-          className="w-full h-full object-cover object-center filter brightness-105 contrast-105 scale-105 transform motion-safe:animate-subtle-zoom"
+          className="w-full h-full object-cover object-center filter brightness-105 contrast-105 saturate-110 scale-105 transform motion-safe:animate-subtle-zoom"
           loading="eager"
         />
-        {/* Subtle radial/bottom vignette from-[#283618]/45 via-[#283618]/60 to-[#283618]/90 so chandelier lighting shines through */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#283618]/45 via-[#283618]/60 to-[#283618]/90"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,#283618_95%)] opacity-60"></div>
+        {/* Neutral warm dark charcoal vignette with zero green tint over the chandeliers */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/40 to-[#283618]"></div>
       </div>
 
       {/* Main Hero Content */}
