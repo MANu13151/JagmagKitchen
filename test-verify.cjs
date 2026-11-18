@@ -33,8 +33,8 @@ async function run() {
   await desktopPage.goto('http://localhost:5230/', { waitUntil: 'networkidle' });
   await desktopPage.waitForTimeout(1000);
 
-  // Check all images
-  const images = await desktopPage.$$eval('img', imgs => imgs.map(img => ({
+  // Check all images on desktop
+  const desktopImages = await desktopPage.$$eval('img', imgs => imgs.map(img => ({
     src: img.src,
     alt: img.alt,
     complete: img.complete,
@@ -42,9 +42,8 @@ async function run() {
     naturalHeight: img.naturalHeight
   })));
 
-  console.log("Desktop Images found:", images.length);
-  images.forEach(img => {
-    console.log(`Image: ${img.src} -> width: ${img.naturalWidth}, height: ${img.naturalHeight}`);
+  console.log("Desktop Images found:", desktopImages.length);
+  desktopImages.forEach(img => {
     if (img.naturalWidth === 0) {
       errors.push(`Broken image: ${img.src}`);
     }
@@ -91,31 +90,57 @@ async function run() {
   await mobilePage.goto('http://localhost:5230/', { waitUntil: 'networkidle' });
   await mobilePage.waitForTimeout(1000);
 
-  // Save mobile screenshot
-  const mobileScreenshot = path.join(__dirname, 'mobile-390x844.png');
-  await mobilePage.screenshot({ path: mobileScreenshot, fullPage: true });
-  console.log("Saved mobile screenshot to:", mobileScreenshot);
-
-  // 3. Test Banquet Estimator slider interaction & animated ticker
-  console.log("\nTesting Banquet Estimator slider interaction...");
-  const slider = await desktopPage.$('input[type="range"]');
-  if (slider) {
-    await slider.fill('100');
-    await desktopPage.waitForTimeout(400);
-    console.log("Successfully adjusted slider to 100 guests");
+  // Check Floating Mobile Bar visibility
+  const floatingBar = await mobilePage.$('text=Table QR Menu');
+  if (!floatingBar) {
+    errors.push("Floating Mobile Bar with 'Table QR Menu' button not found on mobile viewport!");
+  } else {
+    console.log("Floating Mobile Bar is active and visible on mobile viewport.");
   }
 
-  // 4. Test Table QR Modal Simulator
-  console.log("\nTesting Live Table QR Modal Simulator...");
-  const qrBtn = await desktopPage.$('button:has-text("Launch Interactive Table QR View")');
-  if (qrBtn) {
-    await qrBtn.click();
-    await desktopPage.waitForTimeout(500);
-    const modalVisible = await desktopPage.$eval('text=Interactive Table QR View (Done-For-You)', el => !!el);
-    console.log("Table QR Modal successfully opened:", modalVisible);
-    const qrScreenshot = path.join(__dirname, 'qr-modal-preview.png');
-    await desktopPage.screenshot({ path: qrScreenshot });
-    console.log("Saved QR modal screenshot to:", qrScreenshot);
+  // Save mobile screenshot
+  const mobileScreenshot = path.join(__dirname, 'mobile-390x844.png');
+  await mobilePage.screenshot({ path: mobileScreenshot });
+  console.log("Saved mobile screenshot to:", mobileScreenshot);
+
+  // 3. Test Mobile QR Modal Opening via Floating Mobile Bar
+  console.log("\nTesting Mobile QR Modal Opening via Floating Mobile Bar...");
+  await floatingBar.click();
+  await mobilePage.waitForTimeout(500);
+
+  const qrTitle = await mobilePage.$eval('text=Contactless Table QR Experience', el => !!el);
+  console.log("Mobile QR Modal opened successfully:", qrTitle);
+  if (!qrTitle) {
+    errors.push("Mobile QR Modal failed to open upon clicking Floating Mobile Bar button!");
+  }
+
+  // Take screenshot of mobile QR modal in Simulator mode
+  const mobileModalSimScreenshot = path.join(__dirname, 'mobile-qr-modal-simulator.png');
+  await mobilePage.screenshot({ path: mobileModalSimScreenshot });
+  console.log("Saved mobile QR simulator screenshot to:", mobileModalSimScreenshot);
+
+  // Switch to Scan with Phone tab
+  console.log("Switching to 'Scan with Phone' tab...");
+  const scanTabBtn = await mobilePage.$('button:has-text("Scan with Phone")');
+  if (scanTabBtn) {
+    await scanTabBtn.click();
+    await mobilePage.waitForTimeout(400);
+
+    const qrImg = await mobilePage.$eval('img[alt="Scan to open Jagmag on mobile"]', img => ({
+      src: img.src,
+      naturalWidth: img.naturalWidth,
+      naturalHeight: img.naturalHeight
+    }));
+    console.log("Scannable QR Image loaded:", qrImg);
+    if (!qrImg.naturalWidth || qrImg.naturalWidth === 0) {
+      errors.push("Scannable QR SVG failed to render or has 0 naturalWidth!");
+    }
+
+    const mobileModalScanScreenshot = path.join(__dirname, 'mobile-qr-modal-scan.png');
+    await mobilePage.screenshot({ path: mobileModalScanScreenshot });
+    console.log("Saved mobile QR scan screenshot to:", mobileModalScanScreenshot);
+  } else {
+    errors.push("Could not find 'Scan with Phone' tab button!");
   }
 
   await browser.close();

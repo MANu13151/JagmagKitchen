@@ -88,20 +88,27 @@ export default function Navbar({ onOpenBanquet, onOpenReservation, onOpenQr }) {
             </button>
           </div>
 
-          {/* Mobile Menu Toggle */}
-          <div className="flex lg:hidden items-center gap-2">
+          {/* Mobile Actions */}
+          <div className="flex lg:hidden items-center gap-1.5 sm:gap-2">
+            <button
+              onClick={onOpenQr}
+              className="btn-press whitespace-nowrap px-2.5 py-1.5 rounded-full bg-[#DDA15E]/15 border border-[#DDA15E]/50 text-[#DDA15E] text-[11px] font-bold uppercase tracking-wider flex items-center gap-1 min-h-[38px] cursor-pointer"
+            >
+              <QrCode className="w-3.5 h-3.5 text-[#DDA15E]" />
+              <span>QR Menu</span>
+            </button>
             <button
               onClick={onOpenBanquet}
-              className="btn-press whitespace-nowrap px-3 py-1.5 rounded-full bg-[#BC6C25] text-[#FEFAE0] text-[11px] font-bold uppercase tracking-wider"
+              className="btn-press whitespace-nowrap px-2.5 sm:px-3 py-1.5 rounded-full bg-[#BC6C25] text-[#FEFAE0] text-[11px] font-bold uppercase tracking-wider min-h-[38px] cursor-pointer"
             >
               Banquet
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2.5 rounded-lg text-[#FEFAE0] hover:bg-[#606C38]/40 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
+              className="p-2 rounded-lg text-[#FEFAE0] hover:bg-[#606C38]/40 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center cursor-pointer"
               aria-label="Toggle navigation menu"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6 text-[#DDA15E]" />}
+              {mobileMenuOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6 text-[#DDA15E]" />}
             </button>
           </div>
 

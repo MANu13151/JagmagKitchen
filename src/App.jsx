@@ -7,6 +7,7 @@ import CuratedMenu from "./components/CuratedMenu";
 import LocationFooter from "./components/LocationFooter";
 import ReservationModal from "./components/ReservationModal";
 import QrModal from "./components/QrModal";
+import FloatingMobileBar from "./components/FloatingMobileBar";
 
 export default function App() {
   const [isReservationOpen, setIsReservationOpen] = useState(false);
@@ -20,7 +21,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FEFAE0] text-[#283618] flex flex-col font-sans selection:bg-[#BC6C25] selection:text-[#FEFAE0]">
+    <div className="min-h-screen bg-[#FEFAE0] text-[#283618] flex flex-col font-sans selection:bg-[#BC6C25] selection:text-[#FEFAE0] pb-20 lg:pb-0">
       {/* Editorial Single-Row Header */}
       <Navbar 
         onOpenBanquet={scrollToBanquets}
@@ -33,6 +34,7 @@ export default function App() {
         <Hero 
           onOpenBanquet={scrollToBanquets}
           onOpenReservation={() => setIsReservationOpen(true)}
+          onOpenQr={() => setIsQrOpen(true)}
         />
 
         {/* Two Worlds Under One Roof Asymmetric Spaces Showcase */}
@@ -55,6 +57,12 @@ export default function App() {
       <LocationFooter 
         onOpenBanquet={scrollToBanquets}
         onOpenReservation={() => setIsReservationOpen(true)}
+      />
+
+      {/* Floating Bottom Quick Action Bar for Mobile Guests */}
+      <FloatingMobileBar 
+        onOpenQr={() => setIsQrOpen(true)}
+        onOpenBanquet={scrollToBanquets}
       />
 
       {/* Dining Table Reservation Modal */}

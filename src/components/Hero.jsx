@@ -2,7 +2,7 @@ import React from "react";
 import { Sparkles, Utensils, ArrowRight, Star, Trees, Users, Flame, ShieldCheck } from "lucide-react";
 import { JAGMAG_INFO } from "../data/config";
 
-export default function Hero({ onOpenBanquet, onOpenReservation }) {
+export default function Hero({ onOpenBanquet, onOpenReservation, onOpenQr }) {
   return (
     <section className="relative min-h-[94vh] flex items-center justify-center overflow-hidden bg-[#1A2312] text-[#FEFAE0]">
       
@@ -45,7 +45,7 @@ export default function Hero({ onOpenBanquet, onOpenReservation }) {
         </p>
 
         {/* Dual High-Converting CTAs */}
-        <div className="animate-entrance-4 flex flex-col sm:flex-row items-center gap-4 sm:gap-5 mb-14 w-full sm:w-auto">
+        <div className="animate-entrance-4 flex flex-col sm:flex-row items-center gap-4 sm:gap-5 mb-8 sm:mb-10 w-full sm:w-auto">
           <button
             onClick={onOpenBanquet}
             className="btn-press w-full sm:w-auto px-8 py-4 rounded-full bg-[#BC6C25] text-[#FEFAE0] font-bold text-sm uppercase tracking-widest border border-[#DDA15E]/60 shadow-[0_8px_25px_rgba(188,108,37,0.45)] hover:bg-[#9D5518] flex items-center justify-center gap-2.5 cursor-pointer whitespace-nowrap"
@@ -61,6 +61,18 @@ export default function Hero({ onOpenBanquet, onOpenReservation }) {
           >
             <Utensils className="w-4 h-4 text-[#DDA15E]" />
             <span>Reserve Dining Table</span>
+          </button>
+        </div>
+
+        {/* Quick Tap Table QR Trigger for Guests on Mobile */}
+        <div className="w-full max-w-sm mb-10">
+          <button
+            onClick={onOpenQr}
+            className="btn-press w-full py-2.5 px-4 rounded-full bg-[#DDA15E]/15 border border-[#DDA15E]/50 hover:bg-[#DDA15E]/25 text-[#DDA15E] text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-md cursor-pointer"
+          >
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span>Sitting at a Table? Open Live Table QR Menu</span>
+            <ArrowRight className="w-3.5 h-3.5 text-[#DDA15E]" />
           </button>
         </div>
 
