@@ -54,13 +54,23 @@ async function run() {
   const headline = await desktopPage.$eval('h1', el => el.innerText.trim());
   console.log("Headline:", headline);
 
+  // Check WhatsApp phone number
+  const waLinks = await desktopPage.$$eval('a[href*="wa.me"]', links => links.map(l => l.href));
+  console.log("Found WhatsApp links:", waLinks.length);
+  const invalidLinks = waLinks.filter(l => !l.includes("919903033131"));
+  if (invalidLinks.length > 0) {
+    errors.push(`Invalid WhatsApp links found not using 919903033131: ${invalidLinks.join(", ")}`);
+  } else {
+    console.log("All WhatsApp links correctly use JAGMAG_PHONE 919903033131");
+  }
+
   // Save desktop screenshot
   const desktopScreenshot = path.join(__dirname, 'desktop-1440x900.png');
   await desktopPage.screenshot({ path: desktopScreenshot, fullPage: true });
   console.log("Saved desktop screenshot to:", desktopScreenshot);
 
   // 2. Mobile Test (390 x 844) - iPhone 14
-  console.log("\nTesting Mobile 390x844...");
+  console.log("\nTesting Mobile 390x844 (iPhone Manager Viewport)...");
   const mobileContext = await browser.newContext({
     viewport: { width: 390, height: 844 },
     userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.5 Mobile/15E148 Safari/604.1'
@@ -86,13 +96,26 @@ async function run() {
   await mobilePage.screenshot({ path: mobileScreenshot, fullPage: true });
   console.log("Saved mobile screenshot to:", mobileScreenshot);
 
-  // Test Banquet Estimator interactions
-  console.log("\nTesting Banquet Estimator...");
+  // 3. Test Banquet Estimator slider interaction & animated ticker
+  console.log("\nTesting Banquet Estimator slider interaction...");
   const slider = await desktopPage.$('input[type="range"]');
   if (slider) {
     await slider.fill('100');
     await desktopPage.waitForTimeout(400);
     console.log("Successfully adjusted slider to 100 guests");
+  }
+
+  // 4. Test Table QR Modal Simulator
+  console.log("\nTesting Live Table QR Modal Simulator...");
+  const qrBtn = await desktopPage.$('button:has-text("Launch Interactive Table QR View")');
+  if (qrBtn) {
+    await qrBtn.click();
+    await desktopPage.waitForTimeout(500);
+    const modalVisible = await desktopPage.$eval('text=Interactive Table QR View (Done-For-You)', el => !!el);
+    console.log("Table QR Modal successfully opened:", modalVisible);
+    const qrScreenshot = path.join(__dirname, 'qr-modal-preview.png');
+    await desktopPage.screenshot({ path: qrScreenshot });
+    console.log("Saved QR modal screenshot to:", qrScreenshot);
   }
 
   await browser.close();

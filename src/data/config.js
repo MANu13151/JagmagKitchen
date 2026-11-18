@@ -1,4 +1,5 @@
-export const JAGMAG_PHONE = "+91 98290 88888";
+export const JAGMAG_PHONE = "919903033131";
+export const JAGMAG_PHONE_DISPLAY = "+91 99030 33131";
 
 export const JAGMAG_INFO = {
   name: "JAGMAG",
@@ -8,8 +9,8 @@ export const JAGMAG_INFO = {
   tagline: "Where Warmth Meets Grand Celebration",
   description: "From artisanal sushi and slow-simmered North Indian delicacies under macramé chandeliers to bespoke private banquets for 30 to 150 guests in Jaipur.",
   phone: JAGMAG_PHONE,
-  displayPhone: JAGMAG_PHONE,
-  banquetManager: JAGMAG_PHONE,
+  displayPhone: JAGMAG_PHONE_DISPLAY,
+  banquetManager: JAGMAG_PHONE_DISPLAY,
   diningHours: "12:00 PM – 11:30 PM (Daily)",
   banquetSlots: "Lunch Banquets: 12:00 PM – 4:00 PM | Evening Soirées: 7:00 PM – 11:30 PM",
   address: "S-54, Arvind Marg, Near Ahimsa Circle, C-Scheme, Jaipur, Rajasthan 302001",

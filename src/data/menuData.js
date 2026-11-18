@@ -2,13 +2,13 @@ export const SPACES_DATA = [
   {
     num: "01",
     id: "hall",
-    title: "The Chandelier Dining Hall",
+    title: "The Chandelier Banquet Hall",
     subtitle: "Warm Copper Cove Lighting & Macramé Pendants",
     image: "/assets/chandelier-dining-hall.jpg",
-    alt: "Glowing macramé chandeliers and cove-lit dining hall at Jagmag Kitchen",
-    tag: "Signature Dining & Banquets",
-    capacity: "Up to 110 Guests",
-    description: "An architectural marvel featuring arched amber backlit alcoves, cascading handcrafted macramé chandeliers, and plush banquet seating. Designed for grand family gatherings, milestone anniversaries, and celebratory dinners."
+    alt: "Glowing macramé chandeliers and cove-lit curved dining hall at Jagmag Kitchen",
+    tag: "Signature Banquets & Dining",
+    capacity: "Up to 120 Guests",
+    description: "An architectural marvel featuring arched amber backlit alcoves, cascading handcrafted macramé chandeliers, and plush banquet seating. Designed for grand family gatherings, milestone anniversaries, and bespoke banquets."
   },
   {
     num: "02",
@@ -17,20 +17,20 @@ export const SPACES_DATA = [
     subtitle: "Indoor Banana Palms & Woven Basket Lanterns",
     image: "/assets/tropical-atrium-courtyard.jpg",
     alt: "Lush tropical atrium courtyard with palms and basket lanterns at Jagmag Kitchen",
-    tag: "Open-Air Garden Vibe",
+    tag: "Open-Air Botanical Garden",
     capacity: "Up to 75 Guests",
     description: "Step into an oasis of botanical serenity. Multi-tiered terraced brick planters, mature broadleaf palms, and overhead woven rattan lanterns creating an ethereal twilight ambiance for evening cocktails and intimate parties."
   },
   {
     num: "03",
     id: "kitchen",
-    title: "Curated Global & Indian Kitchen",
-    subtitle: "Artisanal Maki, Dimsums & Royal Awadhi Delicacies",
+    title: "Curated Pan-Asian & Royal Indian Kitchen",
+    subtitle: "Avocado Maki, Artisanal Dimsums & Slow-Simmered Awadhi Delicacies",
     image: "/assets/avocado-sushi-maki.jpg",
     alt: "Artisanal Avocado and Cream Cheese Maki Roll with engraved Jagmag wooden cutlery box",
-    tag: "Fine Culinary Craft",
-    capacity: "A La Carte & Live Counters",
-    description: "Our culinary philosophy celebrates juxtaposition: freshly rolled avocado & cream cheese maki served alongside slow-simmered 24-hour Dal Jagmag Makhani, wood-fired artisanal flatbreads, and handcrafted dimsums."
+    tag: "Epicurean Craft & Live Counters",
+    capacity: "Live Counters & A La Carte",
+    description: "Our culinary craft celebrates juxtaposition: freshly rolled avocado & cream cheese maki served alongside slow-simmered 24-hour Dal Jagmag Makhani, wood-fired artisanal flatbreads, and authentic engraved 'जगमग' cutlery service."
   }
 ];
 

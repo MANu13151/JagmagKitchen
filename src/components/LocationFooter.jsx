@@ -3,7 +3,7 @@ import {
   MapPin, Clock, Phone, Sparkles, Navigation, 
   ExternalLink, Heart, Shield, Car, MessageSquare 
 } from "lucide-react";
-import { JAGMAG_INFO, JAGMAG_PHONE, getWhatsAppLink } from "../data/config";
+import { JAGMAG_INFO, JAGMAG_PHONE, JAGMAG_PHONE_DISPLAY, getWhatsAppLink } from "../data/config";
 
 export default function LocationFooter({ onOpenBanquet, onOpenReservation }) {
   return (
@@ -107,7 +107,7 @@ export default function LocationFooter({ onOpenBanquet, onOpenReservation }) {
                     <span className="font-bold text-[#DDA15E] text-xs uppercase tracking-wider">Banquet Manager & Table Desk:</span>
                     <p className="text-xs text-[#FEFAE0]/85 mt-0.5 font-mono font-bold">
                       <a href={`tel:${JAGMAG_PHONE}`} className="hover:text-[#DDA15E] transition-colors">
-                        {JAGMAG_PHONE}
+                        {JAGMAG_PHONE_DISPLAY}
                       </a>
                     </p>
                   </div>

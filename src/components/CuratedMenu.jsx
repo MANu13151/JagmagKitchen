@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { Sparkles, Utensils, QrCode, ArrowRight, Star } from "lucide-react";
+import { Sparkles, Utensils, QrCode, ArrowRight, Star, Flame, Eye } from "lucide-react";
 import { MENU_CATEGORIES, MENU_ITEMS } from "../data/menuData";
-import { getWhatsAppLink } from "../data/config";
+import { JAGMAG_PHONE, JAGMAG_PHONE_DISPLAY, getWhatsAppLink } from "../data/config";
 
 export default function CuratedMenu({ onOpenQr, onOpenReservation }) {
   const [activeTab, setActiveTab] = useState("sushi");
 
   return (
-    <section id="menu" className="py-20 sm:py-28 bg-[#283618] text-[#FEFAE0] relative overflow-hidden">
+    <section id="menu" className="py-20 sm:py-28 bg-[#1A2312] text-[#FEFAE0] relative overflow-hidden">
       
       {/* Decorative Warm Vignette */}
       <div className="absolute top-1/4 -right-40 w-96 h-96 bg-[#BC6C25]/20 rounded-full filter blur-3xl pointer-events-none"></div>
@@ -34,25 +34,29 @@ export default function CuratedMenu({ onOpenQr, onOpenReservation }) {
           <div className="flex items-center gap-3">
             <button
               onClick={onOpenQr}
-              className="btn-press px-5 py-3 rounded-full bg-[#BC6C25] text-[#FEFAE0] font-bold text-xs uppercase tracking-wider flex items-center gap-2 shadow-lg hover:bg-[#9D5518] cursor-pointer"
+              className="btn-press px-5 py-3 rounded-full bg-[#BC6C25] text-[#FEFAE0] font-bold text-xs uppercase tracking-wider flex items-center gap-2 shadow-lg hover:bg-[#9D5518] cursor-pointer whitespace-nowrap"
             >
               <QrCode className="w-4 h-4 text-[#FEFAE0]" />
-              <span>Preview Table QR Menu</span>
+              <span>Launch Interactive Table QR View</span>
             </button>
           </div>
         </div>
 
-        {/* Featured Dish Showcase: Avocado Maki Roll (1000052779.png) */}
+        {/* Featured Dish Showcase: Avocado Maki Roll (1000052779.png) with engraved 'जगमग' box */}
         <div className="mb-16 bg-[#202C13] rounded-3xl border-2 border-[#DDA15E]/30 p-6 sm:p-8 shadow-2xl">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
-            <div className="lg:col-span-6 rounded-2xl overflow-hidden border border-[#DDA15E]/30 bg-black/40 h-72 sm:h-80">
+            <div className="lg:col-span-6 rounded-2xl overflow-hidden border border-[#DDA15E]/30 bg-black/40 h-72 sm:h-84 relative group">
               <img
                 src="/assets/avocado-sushi-maki.jpg"
                 alt="Artisanal Avocado and Cream Cheese Maki Roll with engraved Jagmag wooden cutlery box"
-                className="w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-500"
+                className="w-full h-full object-cover object-center filter brightness-105 contrast-105 group-hover:scale-105 transition-transform duration-500"
                 loading="eager"
               />
+              <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-[#120F0D]/90 backdrop-blur-sm border border-[#DDA15E]/40 text-[#DDA15E] text-[11px] font-bold flex items-center gap-1.5">
+                <span className="font-devanagari">जगमग</span>
+                <span>• Engraved Cutlery Box</span>
+              </div>
             </div>
 
             <div className="lg:col-span-6 flex flex-col justify-between">
@@ -91,16 +95,24 @@ export default function CuratedMenu({ onOpenQr, onOpenReservation }) {
                 </div>
               </div>
 
-              <div className="flex items-center gap-4">
+              <div className="flex flex-wrap items-center gap-4">
                 <a
-                  href={getWhatsAppLink("Hi Jagmag, I'd like to reserve a table and pre-order the Avocado & Cream Cheese Maki Roll!")}
+                  href={getWhatsAppLink("Hi Jagmag, I'd like to reserve a table and pre-order the signature Avocado & Cream Cheese Maki Roll (₹445)!")}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-press px-6 py-3 rounded-full bg-[#BC6C25] text-[#FEFAE0] font-bold text-xs uppercase tracking-wider flex items-center gap-2 hover:bg-[#9D5518]"
+                  className="btn-press px-6 py-3.5 rounded-full bg-[#BC6C25] text-[#FEFAE0] font-bold text-xs uppercase tracking-wider flex items-center gap-2 hover:bg-[#9D5518] shadow-md"
                 >
-                  <span>Pre-order for Table</span>
+                  <span>Pre-order on WhatsApp ({JAGMAG_PHONE_DISPLAY})</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </a>
+
+                <button
+                  onClick={onOpenQr}
+                  className="btn-press px-5 py-3.5 rounded-full bg-[#283618] text-[#DDA15E] border border-[#DDA15E]/50 font-bold text-xs uppercase tracking-wider hover:bg-[#606C38]/30 flex items-center gap-2 cursor-pointer"
+                >
+                  <Eye className="w-3.5 h-3.5" />
+                  <span>View in Table QR</span>
+                </button>
               </div>
             </div>
 
@@ -165,7 +177,7 @@ export default function CuratedMenu({ onOpenQr, onOpenReservation }) {
                 </span>
 
                 <a
-                  href={getWhatsAppLink(`Hi Jagmag, I'd like to pre-order ${item.name} (${item.price}) for my upcoming visit!`)}
+                  href={getWhatsAppLink(`Hi Jagmag, I'd like to reserve a table and pre-order ${item.name} (${item.price})!`)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-bold text-[#DDA15E] hover:text-[#FEFAE0] transition-colors flex items-center gap-1"

@@ -25,6 +25,7 @@ export default function App() {
       <Navbar 
         onOpenBanquet={scrollToBanquets}
         onOpenReservation={() => setIsReservationOpen(true)}
+        onOpenQr={() => setIsQrOpen(true)}
       />
 
       <main className="flex-1">

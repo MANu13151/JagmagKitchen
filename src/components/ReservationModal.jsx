@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { X, Utensils, Calendar, Clock, Users, Sparkles, MessageSquare, Phone } from "lucide-react";
-import { JAGMAG_INFO, JAGMAG_PHONE, getWhatsAppLink } from "../data/config";
+import { JAGMAG_INFO, JAGMAG_PHONE, JAGMAG_PHONE_DISPLAY, getWhatsAppLink } from "../data/config";
 
 export default function ReservationModal({ isOpen, onClose }) {
   const [formData, setFormData] = useState({
@@ -178,7 +178,7 @@ export default function ReservationModal({ isOpen, onClose }) {
               <span>Confirm Table via WhatsApp</span>
             </button>
             <p className="text-[11px] text-center text-[#283618]/70 mt-2 font-medium">
-              ✨ Instant confirmation on WhatsApp or call hotline directly at <a href={`tel:${JAGMAG_PHONE}`} className="font-bold text-[#BC6C25] hover:underline">{JAGMAG_PHONE}</a>
+              ✨ Instant confirmation on WhatsApp or call table desk directly at <a href={`tel:${JAGMAG_PHONE}`} className="font-bold text-[#BC6C25] hover:underline">{JAGMAG_PHONE_DISPLAY}</a>
             </p>
           </div>
         </form>

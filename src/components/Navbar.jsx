@@ -1,18 +1,18 @@
 import React, { useState } from "react";
-import { Sparkles, Calendar, Utensils, MapPin, Menu, X } from "lucide-react";
+import { Sparkles, Utensils, MapPin, Menu, X, QrCode, Calculator } from "lucide-react";
 import { JAGMAG_INFO } from "../data/config";
 
-export default function Navbar({ onOpenBanquet, onOpenReservation }) {
+export default function Navbar({ onOpenBanquet, onOpenReservation, onOpenQr }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-[#283618]/95 backdrop-blur-md border-b border-[#DDA15E]/20 text-[#FEFAE0]">
+    <header className="sticky top-0 z-50 bg-[#1A2312]/95 backdrop-blur-md border-b border-[#DDA15E]/20 text-[#FEFAE0]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20 gap-4">
           
           {/* Left Brand Emblem */}
           <a href="#" className="flex items-center gap-3 group flex-shrink-0">
-            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-[#606C38]/40 border border-[#DDA15E]/40 flex flex-col items-center justify-center text-[#FEFAE0] shadow-inner group-hover:border-[#DDA15E] transition-all">
+            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-[#283618] border border-[#DDA15E]/50 flex flex-col items-center justify-center text-[#FEFAE0] shadow-md group-hover:border-[#DDA15E] transition-all">
               <span className="font-devanagari text-[11px] sm:text-xs text-[#DDA15E] leading-none">जगमग</span>
               <span className="font-display text-xs sm:text-sm font-black tracking-widest text-[#FEFAE0] leading-none mt-0.5">J</span>
             </div>
@@ -31,7 +31,7 @@ export default function Navbar({ onOpenBanquet, onOpenReservation }) {
             </div>
           </a>
 
-          {/* Center Navigation Links - Guaranteed Single Row */}
+          {/* Center Navigation Links - Guaranteed Single-Row Uncluttered */}
           <nav className="hidden lg:flex items-center gap-6 xl:gap-8 text-[13.5px] xl:text-[14px] font-semibold tracking-wide text-[#FEFAE0]/90 whitespace-nowrap">
             <a 
               href="#spaces" 
@@ -43,7 +43,7 @@ export default function Navbar({ onOpenBanquet, onOpenReservation }) {
               href="#banquets" 
               className="whitespace-nowrap hover:text-[#DDA15E] transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-[#DDA15E] hover:after:w-full after:transition-all flex items-center gap-1.5"
             >
-              <span>Banquets & Events</span>
+              <span>Banquet Estimator</span>
               <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-[#BC6C25]/40 text-[#FEFAE0] border border-[#BC6C25]/60 font-bold whitespace-nowrap">
                 30-150 Pax
               </span>
@@ -54,15 +54,22 @@ export default function Navbar({ onOpenBanquet, onOpenReservation }) {
             >
               Curated Menu
             </a>
+            <button
+              onClick={onOpenQr}
+              className="whitespace-nowrap hover:text-[#DDA15E] transition-colors py-1 flex items-center gap-1.5 cursor-pointer text-left"
+            >
+              <QrCode className="w-3.5 h-3.5 text-[#DDA15E]" />
+              <span>Table QR</span>
+            </button>
             <a 
               href="#visit" 
               className="whitespace-nowrap hover:text-[#DDA15E] transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-[#DDA15E] hover:after:w-full after:transition-all"
             >
-              Visit & Valet
+              Visit
             </a>
           </nav>
 
-          {/* Right Dual CTAs - Guaranteed Single Row */}
+          {/* Right Dual CTAs */}
           <div className="hidden lg:flex items-center gap-2.5 xl:gap-3 flex-shrink-0 whitespace-nowrap">
             <button
               onClick={onOpenBanquet}
@@ -77,7 +84,7 @@ export default function Navbar({ onOpenBanquet, onOpenReservation }) {
               className="btn-press whitespace-nowrap px-4 xl:px-5 py-2.5 rounded-full bg-[#202C13] text-[#DDA15E] text-xs font-bold tracking-wider uppercase border border-[#DDA15E]/60 hover:bg-[#606C38]/40 shadow-sm cursor-pointer flex items-center gap-1.5"
             >
               <Utensils className="w-3.5 h-3.5 text-[#DDA15E]" />
-              <span className="whitespace-nowrap">Book a Table</span>
+              <span className="whitespace-nowrap">Book Table</span>
             </button>
           </div>
 
@@ -91,7 +98,7 @@ export default function Navbar({ onOpenBanquet, onOpenReservation }) {
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg text-[#FEFAE0] hover:bg-[#606C38]/40 transition-colors"
+              className="p-2.5 rounded-lg text-[#FEFAE0] hover:bg-[#606C38]/40 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
               aria-label="Toggle navigation menu"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6 text-[#DDA15E]" />}
@@ -103,48 +110,59 @@ export default function Navbar({ onOpenBanquet, onOpenReservation }) {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-[#202C13] border-b border-[#DDA15E]/30 px-5 pt-4 pb-8 space-y-4">
-          <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-[#283618] border border-[#DDA15E]/20 text-xs font-semibold text-[#DDA15E]">
+        <div className="lg:hidden bg-[#1A2312] border-b border-[#DDA15E]/30 px-5 pt-4 pb-8 space-y-4 animate-in fade-in duration-200">
+          <div className="flex items-center gap-2 px-3 py-2.5 rounded-xl bg-[#283618] border border-[#DDA15E]/20 text-xs font-semibold text-[#DDA15E]">
             <MapPin className="w-4 h-4 text-[#DDA15E]" />
-            <span>C-Scheme, Jaipur • Valet Parking</span>
+            <span>C-Scheme, Jaipur • Complimentary Valet</span>
           </div>
 
           <a
             href="#spaces"
             onClick={() => setMobileMenuOpen(false)}
-            className="block px-3 py-2 rounded-lg text-base font-medium text-[#FEFAE0] hover:bg-[#606C38]/30"
+            className="block px-3 py-2.5 rounded-lg text-base font-medium text-[#FEFAE0] hover:bg-[#606C38]/30"
           >
             The Spaces (Chandelier Hall & Atrium)
           </a>
           <a
             href="#banquets"
             onClick={() => setMobileMenuOpen(false)}
-            className="block px-3 py-2 rounded-lg text-base font-medium text-[#FEFAE0] hover:bg-[#606C38]/30"
+            className="block px-3 py-2.5 rounded-lg text-base font-medium text-[#FEFAE0] hover:bg-[#606C38]/30 flex items-center justify-between"
           >
-            Banquet & Private Event Estimator
+            <span>Banquet & Event Estimator</span>
+            <span className="text-[11px] px-2 py-0.5 rounded-full bg-[#BC6C25] text-[#FEFAE0] font-bold">30–150 Pax</span>
           </a>
           <a
             href="#menu"
             onClick={() => setMobileMenuOpen(false)}
-            className="block px-3 py-2 rounded-lg text-base font-medium text-[#FEFAE0] hover:bg-[#606C38]/30"
+            className="block px-3 py-2.5 rounded-lg text-base font-medium text-[#FEFAE0] hover:bg-[#606C38]/30"
           >
             Curated Kitchen Menu
           </a>
+          <button
+            onClick={() => {
+              setMobileMenuOpen(false);
+              onOpenQr();
+            }}
+            className="w-full text-left px-3 py-2.5 rounded-lg text-base font-medium text-[#FEFAE0] hover:bg-[#606C38]/30 flex items-center justify-between"
+          >
+            <span>Launch Live Table QR Scanner</span>
+            <QrCode className="w-4 h-4 text-[#DDA15E]" />
+          </button>
           <a
             href="#visit"
             onClick={() => setMobileMenuOpen(false)}
-            className="block px-3 py-2 rounded-lg text-base font-medium text-[#FEFAE0] hover:bg-[#606C38]/30"
+            className="block px-3 py-2.5 rounded-lg text-base font-medium text-[#FEFAE0] hover:bg-[#606C38]/30"
           >
             Location & Dining Hours
           </a>
 
-          <div className="pt-2 flex flex-col gap-2.5">
+          <div className="pt-2 flex flex-col gap-3">
             <button
               onClick={() => {
                 setMobileMenuOpen(false);
                 onOpenBanquet();
               }}
-              className="w-full py-3 rounded-full bg-[#BC6C25] text-[#FEFAE0] text-center font-bold text-xs uppercase tracking-widest shadow-md"
+              className="w-full py-3.5 rounded-full bg-[#BC6C25] text-[#FEFAE0] text-center font-bold text-xs uppercase tracking-widest shadow-md"
             >
               Inquire Banquet (30–150 Pax)
             </button>
@@ -153,7 +171,7 @@ export default function Navbar({ onOpenBanquet, onOpenReservation }) {
                 setMobileMenuOpen(false);
                 onOpenReservation();
               }}
-              className="w-full py-3 rounded-full bg-[#283618] text-[#DDA15E] border border-[#DDA15E]/60 text-center font-bold text-xs uppercase tracking-widest"
+              className="w-full py-3.5 rounded-full bg-[#202C13] text-[#DDA15E] border border-[#DDA15E]/60 text-center font-bold text-xs uppercase tracking-widest"
             >
               Reserve Dining Table
             </button>
